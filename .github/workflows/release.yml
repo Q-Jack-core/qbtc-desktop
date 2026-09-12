@@ -21,18 +21,25 @@ jobs:
 
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: x86_64-apple-darwin, aarch64-apple-darwin
 
-      - name: Compile Core Node
+      - name: Compile Core Node Sidecar
         shell: bash
         run: |
           git clone https://github.com/Q-Jack-core/quantum-btc.git core_node
           cd core_node
-          cargo build --release
-          cd ..
-          mkdir -p src-tauri/bin
-          cp core_node/target/release/quantum-btc src-tauri/bin/quantum-btc-x86_64-apple-darwin || true
-          cp core_node/target/release/quantum-btc src-tauri/bin/quantum-btc-aarch64-apple-darwin || true
-          cp core_node/target/release/quantum-btc.exe src-tauri/bin/quantum-btc-x86_64-pc-windows-msvc.exe || true
+          mkdir -p ../src-tauri/bin
+          
+          if [ "$RUNNER_OS" == "macOS" ]; then
+            cargo build --release --target x86_64-apple-darwin
+            cargo build --release --target aarch64-apple-darwin
+            cp target/x86_64-apple-darwin/release/quantum-btc ../src-tauri/bin/quantum-btc-x86_64-apple-darwin
+            cp target/aarch64-apple-darwin/release/quantum-btc ../src-tauri/bin/quantum-btc-aarch64-apple-darwin
+          elif [ "$RUNNER_OS" == "Windows" ]; then
+            cargo build --release
+            cp target/release/quantum-btc.exe ../src-tauri/bin/quantum-btc-x86_64-pc-windows-msvc.exe || true
+          fi
 
       - name: Build and Create Release
         uses: tauri-apps/tauri-action@v0
@@ -42,3 +49,4 @@ jobs:
           tagName: ${{ github.ref_name }}
           releaseName: 'Q-BTC Desktop Miner ${{ github.ref_name }}'
           releaseBody: 'Official Q-BTC GUI Miner for Mac & Windows. Download the .dmg or .exe below to start mining.'
+          args: ${{ matrix.platform == 'macos-latest' && '--target universal-apple-darwin' || '' }}
