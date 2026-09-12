@@ -22,6 +22,18 @@ jobs:
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
 
+      - name: Compile Core Node
+        shell: bash
+        run: |
+          git clone https://github.com/Q-Jack-core/quantum-btc.git core_node
+          cd core_node
+          cargo build --release
+          cd ..
+          mkdir -p src-tauri/bin
+          cp core_node/target/release/quantum-btc src-tauri/bin/quantum-btc-x86_64-apple-darwin || true
+          cp core_node/target/release/quantum-btc src-tauri/bin/quantum-btc-aarch64-apple-darwin || true
+          cp core_node/target/release/quantum-btc.exe src-tauri/bin/quantum-btc-x86_64-pc-windows-msvc.exe || true
+
       - name: Build and Create Release
         uses: tauri-apps/tauri-action@v0
         env:
