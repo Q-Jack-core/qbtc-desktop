@@ -1,0 +1,11 @@
+node_modules/
+src-tauri/target/
+.env*
+*.pem
+*.p12
+*.key
+.qbtc_data/
+logs/
+src-tauri/.qbtc_data/
+src-tauri/logs/
+src-tauri/bin/
