@@ -31,11 +31,20 @@ After running this, you can double-click the app to open it normally.
 
 ---
 
-## 🪟 Windows Installation
+## 🪟 Windows Installation & Troubleshooting
 
-1. Download and run the `qbtc-desktop_x64-setup.exe` file.
-2. **Note:** Windows Defender SmartScreen may display a blue warning screen saying "Windows protected your PC". 
-3. Click **More info**, then click **Run anyway** to proceed with the installation.
+1. Download and run the `qbtc-desktop_x64-setup.exe` file[cite: 1].
+2. **Note:** Windows Defender SmartScreen may display a blue warning screen saying "Windows protected your PC"[cite: 1]. 
+3. Click **More info**, then click **Run anyway** to proceed with the installation[cite: 1].
+4. Upon first launch, Windows Security may prompt a Firewall alert. Click **Allow access** to enable the miner to connect to the external Stratum Pool.
+
+### 🛠 Common Windows Errors
+
+**Error: "VCRUNTIME140.dll or MSVCP140.dll was not found"**
+This happens on clean Windows operating systems that lack the standard C++ runtime libraries required by the Rust core engine.
+* **Fix:** Download and install the official Microsoft Visual C++ Redistributable package.
+* **Direct Download Link:** [vc_redist.x64.exe (Official Microsoft Link)](https://aka.ms/vs/17/release/vc_redist.x64.exe)
+* After a quick installation, restart the Q-BTC Desktop Miner. (No system reboot is required).
 
 ---
 
