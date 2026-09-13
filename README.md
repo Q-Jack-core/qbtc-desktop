@@ -43,3 +43,7 @@ After running this, you can double-click the app to open it normally.
 1. Launch the Q-BTC Desktop Miner.
 2. Enter your Q-BTC Wallet Address (Coinbase Reward Target).
 3. Click **START MINING** to connect to the Stratum Pool and begin hashing.
+
+### ⚠️ Important: Receiving Mining Rewards
+Before starting the miner, ensure you enter your **real Q-BTC Wallet Address** (e.g., `qbtc1...`) in the "Pool Mining" tab, not an alias or name. 
+Mining with a fake name or alias will result in permanently lost rewards. If you don't have a wallet yet, you can create one in the "Wallet Overview" tab.
