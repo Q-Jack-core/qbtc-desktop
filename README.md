@@ -44,9 +44,9 @@ After running this, you can double-click the app to open it normally.
 
 ## 🪟 Windows Installation & Troubleshooting
 
-1. Download and run the `qbtc-desktop_x64-setup.exe` file[cite: 1].
-2. **Note:** Windows Defender SmartScreen may display a blue warning screen saying "Windows protected your PC"[cite: 1]. 
-3. Click **More info**, then click **Run anyway** to proceed with the installation[cite: 1].
+1. Download and run the `qbtc-desktop_x64-setup.exe` file.
+2. **Note:** Windows Defender SmartScreen may display a blue warning screen saying "Windows protected your PC". 
+3. Click **More info**, then click **Run anyway** to proceed with the installation.
 4. Upon first launch, Windows Security may prompt a Firewall alert. Click **Allow access** to enable the miner to connect to the external Stratum Pool.
 
 ### 🛠 Common Windows Errors
