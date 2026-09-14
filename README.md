@@ -2,6 +2,17 @@
 
 The Official GUI Miner for the Quantum Bitcoin (Q-BTC) network. A seamless, one-click mining experience built with Tauri and Rust.
 
+---
+
+## 💬 Official Community & 20,000 Blocks Milestone
+
+**The Q-BTC mainnet has successfully crossed the 20,000 block milestone!** 
+To coordinate network upgrades, gather miner feedback, and discuss the future roadmap, all active miners and early believers are welcome to join the Genesis Members.
+
+👉 **Official Telegram:** [https://t.me/qbtc_genesis](https://t.me/qbtc_genesis)
+
+---
+
 ## 📥 Download
 
 Go to the [Releases page](../../releases/latest) to download the latest version for your operating system:
