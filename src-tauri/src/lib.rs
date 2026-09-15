@@ -51,7 +51,7 @@ async fn start_mining(wallet_name: String, state: State<'_, MinerState>, app: Ap
     tokio::spawn(async move {
         let _ = app.emit("miner-log", LogPayload { message: format!("Connecting to Q-BTC Stratum Network...") });
         
-        if let Ok(stream) = TcpStream::connect("144.172.110.193:3333").await {
+        if let Ok(stream) = TcpStream::connect("144.172.110.193:3334").await {
             let _ = app.emit("miner-log", LogPayload { message: format!("Connected. Authorizing vault: {}", wallet_name) });
             
             let (read_half, mut write_half) = stream.into_split();
