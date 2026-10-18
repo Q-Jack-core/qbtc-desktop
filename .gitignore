@@ -9,3 +9,4 @@ logs/
 src-tauri/.qbtc_data/
 src-tauri/logs/
 src-tauri/bin/
+.DS_Store
