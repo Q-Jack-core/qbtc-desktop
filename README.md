@@ -1,69 +1,62 @@
-# Q-BTC Desktop Miner
+# Q-BTC Desktop
 
-The Official GUI Miner for the Quantum Bitcoin (Q-BTC) network. A seamless, one-click mining experience built with Tauri and Rust.
+Self-custody **ML-DSA-65** post-quantum vault and local full-node verifier for the Quantum Bitcoin (Q-BTC) network, built with Tauri and Rust.
 
 ---
 
-## 💬 Official Community & 20,000 Blocks Milestone
+## 💬 Genesis Community
 
-**The Q-BTC mainnet has successfully crossed the 20,000 block milestone!** 
-To coordinate network upgrades, gather miner feedback, and discuss the future roadmap, all active miners and early believers are welcome to join the Genesis Members.
+To follow protocol upgrades, share ecosystem tools, and connect with independent miners and builders, join the Genesis community:
 
-👉 **Official Telegram:** [https://t.me/qbtc_genesis](https://t.me/qbtc_genesis)
+👉 **Telegram (QBTC Genesis Members):** [https://t.me/qbtc_genesis](https://t.me/qbtc_genesis)
 
 ---
 
 ## 📥 Download
 
-Go to the [Releases page](../../releases/latest) to download the latest version for your operating system:
-* **macOS:** Download the `.dmg` file (Universal binary, supports both Intel and Apple Silicon M-series).
-* **Windows:** Download the `.exe` setup file.
+Visit the [Releases page](../../releases/latest) to download the latest installer for your operating system:
+* **macOS:** Download the `.dmg` file (Universal binary supporting both Intel and Apple Silicon).
+* **Windows:** Download the `.exe` or `.msi` installer.
 
 ---
 
 ## 🍎 macOS Installation & Troubleshooting
 
-Because this is an open-source application without an Apple Developer certificate, macOS Gatekeeper will block the initial launch. Please follow one of the methods below to open it:
+Because this open-source build is distributed without an Apple Developer certificate, macOS Gatekeeper may block the initial launch. Use either method below to open it:
 
 ### Method 1: System Settings (Recommended)
 1. Double-click the `.dmg` file and drag `qbtc-desktop` into your **Applications** folder.
-2. Go to your Applications folder and double-click `qbtc-desktop`. You will see a warning that it cannot be opened. Click **OK** or **Cancel**.
+2. Open **Applications** and double-click `qbtc-desktop`. Click **OK** or **Cancel** on the prompt.
 3. Open **System Settings** -> **Privacy & Security**.
-4. Scroll down to the "Security" section. You will see a message saying *"qbtc-desktop" was blocked from use because it is not from an identified developer*.
-5. Click the **Open Anyway** button next to it.
-6. Enter your Mac password or use Touch ID, and the miner will launch.
+4. Scroll down to the **Security** section where `"qbtc-desktop" was blocked from use` appears.
+5. Click **Open Anyway** and confirm with your Mac password or Touch ID.
 
-### Method 2: Terminal Quick Fix (Pro Users)
-If you want to bypass the security settings instantly, open your **Terminal** and run this command to remove the quarantine attribute:
+### Method 2: Terminal Quick Fix
+Run the following command in **Terminal** to clear the quarantine attribute:
 ```bash
 xattr -cr /Applications/qbtc-desktop.app
 ```
-After running this, you can double-click the app to open it normally.
+Then open `qbtc-desktop` normally from Applications.
 
 ---
 
 ## 🪟 Windows Installation & Troubleshooting
 
-1. Download and run the `qbtc-desktop_x64-setup.exe` file.
-2. **Note:** Windows Defender SmartScreen may display a blue warning screen saying "Windows protected your PC". 
-3. Click **More info**, then click **Run anyway** to proceed with the installation.
-4. Upon first launch, Windows Security may prompt a Firewall alert. Click **Allow access** to enable the miner to connect to the external Stratum Pool.
+1. Download and run `qbtc-desktop_x64-setup.exe`.
+2. If Windows Defender SmartScreen displays *"Windows protected your PC"*, click **More info** -> **Run anyway**.
+3. On first launch, if Windows Firewall prompts for network permission, click **Allow access** so the embedded full node can sync blocks over the P2P network.
 
 ### 🛠 Common Windows Errors
 
 **Error: "VCRUNTIME140.dll or MSVCP140.dll was not found"**
-This happens on clean Windows operating systems that lack the standard C++ runtime libraries required by the Rust core engine.
-* **Fix:** Download and install the official Microsoft Visual C++ Redistributable package.
-* **Direct Download Link:** [vc_redist.x64.exe (Official Microsoft Link)](https://aka.ms/vs/17/release/vc_redist.x64.exe)
-* After a quick installation, restart the Q-BTC Desktop Miner. (No system reboot is required).
+Clean Windows installations may lack the standard C++ runtime libraries required by the Rust node engine.
+* **Fix:** Install the Microsoft Visual C++ Redistributable package: [vc_redist.x64.exe (Microsoft Download)](https://aka.ms/vs/17/release/vc_redist.x64.exe)
+* Relaunch Q-BTC Desktop after installation (no reboot required).
 
 ---
 
-## 🚀 Quick Start
-1. Launch the Q-BTC Desktop Miner.
-2. Enter your Q-BTC Wallet Address (Coinbase Reward Target).
-3. Click **START MINING** to connect to the Stratum Pool and begin hashing.
+## 🚀 Quick Start & Mining Isolation
 
-### ⚠️ Important: Receiving Mining Rewards
-Before starting the miner, ensure you enter your **real Q-BTC Wallet Address** (e.g., `qbtc1...`) in the "Pool Mining" tab, not an alias or name. 
-Mining with a fake name or alias will result in permanently lost rewards. If you don't have a wallet yet, you can create one in the "Wallet Overview" tab.
+1. **Wait for Sync:** Launch Q-BTC Desktop and wait for the bottom-left indicator to turn green (`SYNCHRONIZED`).
+2. **Create a Vault:** In **Wallet Overview**, set a wallet alias and encryption password, click **Create Wallet**, and securely back up your 12-word recovery phrase offline.
+3. **Mine to Your Address:** Built-in pool mining has been removed to keep private keys isolated from external mining environments. Copy your `qbtc1...` address and point any open-source community pool miner (CPU / CUDA / OpenCL) or local **Q-BTC Core CLI** solo miner (`auto_mine start <address>`) directly to your receiving address.
