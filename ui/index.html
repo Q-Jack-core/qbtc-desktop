@@ -38,15 +38,15 @@
         .status-box.active .pulse-dot { background: var(--success); box-shadow: 0 0 8px var(--success); animation: pulse 2s infinite; }
         @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.3); opacity: 0.5; } 100% { transform: scale(1); opacity: 1; } }
 
-        .main-content { flex: 1; padding: 40px; overflow-y: auto; overflow-x: hidden; }
+        .main-content { flex: 1; padding: 28px 40px; overflow-y: auto; overflow-x: hidden; box-sizing: border-box; }
 
         .tab-content { display: none; animation: fadeIn 0.3s ease; width: 100%; max-width: 800px; margin: 0 auto; }
         .tab-content.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
-        .section-title { font-size: 22px; font-weight: 800; margin-bottom: 25px; display: flex; align-items: center; gap: 10px; }
+        .section-title { font-size: 22px; font-weight: 800; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
         
-        .card { background: var(--panel-bg); backdrop-filter: blur(16px); border: 1px solid var(--panel-border); border-radius: 16px; padding: 25px; margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .card { background: var(--panel-bg); backdrop-filter: blur(16px); border: 1px solid var(--panel-border); border-radius: 16px; padding: 24px; margin-bottom: 22px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
         .grid-2 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; }
 
         label { display: block; font-size: 11px; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase; font-weight: 800; letter-spacing: 0.5px; }
@@ -61,11 +61,6 @@
         
         button.btn-cyan { background: var(--cyan); color: #000; }
         button.btn-cyan:hover { background: #7dd3fc; box-shadow: 0 0 20px rgba(56, 189, 248, 0.4); }
-        
-        button.secondary { background: rgba(255, 255, 255, 0.03); color: var(--text-muted); border: 1px solid rgba(255, 255, 255, 0.1); }
-        button.secondary:hover { background: rgba(255, 255, 255, 0.08); color: var(--text-main); border-color: rgba(255, 255, 255, 0.25); box-shadow: none; }
-        button.danger { background: rgba(239, 68, 68, 0.1); color: var(--danger); border: 1px solid rgba(239, 68, 68, 0.3); }
-        button.danger:hover { background: var(--danger); color: #fff; box-shadow: 0 0 20px rgba(239, 68, 68, 0.4); }
 
         .balance-box { position: relative; display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
         .balance-box::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, var(--brand), transparent); opacity: 0.7; }
@@ -78,7 +73,10 @@
         .bal-locked { font-size: 15px; color: var(--text-muted); font-weight: 600; font-family: var(--font-mono); white-space: nowrap; }
 
         .console { background: rgba(0,0,0,0.5); border: 1px solid var(--panel-border); border-radius: 8px; padding: 20px; font-family: var(--font-mono); font-size: 12px; color: #a1a1aa; line-height: 1.6; word-break: break-all; min-height: 60px; max-height: 250px; overflow-y: auto; user-select: text; }
-        .log-entry { margin-bottom: 4px; }
+        .guide-title { font-size: 12px; font-weight: 800; color: var(--brand); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+        .guide-text { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin: 0 0 14px 0; user-select: text; }
+        .code-pill { display: inline-block; background: rgba(0,0,0,0.55); border: 1px solid var(--panel-border); padding: 2px 8px; border-radius: 5px; font-family: var(--font-mono); font-size: 12px; color: var(--cyan); white-space: nowrap; }
+        .nowrap { white-space: nowrap; }
     </style>
 </head>
 <body>
@@ -86,7 +84,7 @@
         <div class="logo"><span>₿</span> Q-BTC Core</div>
         <div class="nav-item active" onclick="switchTab('overview', this)">Wallet Overview</div>
         <div class="nav-item" onclick="switchTab('send', this)">Send Transfer</div>
-        <div class="nav-item" onclick="switchTab('mining', this)">Pool Mining</div>
+        <div class="nav-item" onclick="switchTab('mining', this)">Network & Mining</div>
         <div class="status-box" id="node-status"><div class="pulse-dot" id="node-dot"></div><span id="node-text">OFFLINE</span></div>
     </div>
 
@@ -150,40 +148,34 @@
         </div>
 
         <div id="mining" class="tab-content">
-            <div class="section-title">Stratum Pool Engine</div>
+            <div class="section-title">Network Status & Mining</div>
             
-            <div class="grid-2" style="margin-bottom: 25px;">
-                <div class="card balance-box" style="margin-bottom: 0; padding: 20px;">
+            <div class="grid-2" style="margin-bottom: 18px;">
+                <div class="card balance-box" style="margin-bottom: 0; padding: 18px 20px;">
                     <div class="bal-label">Network Height</div>
-                    <div class="bal-value" id="global-height" style="font-size: 28px; font-weight: 800; font-family: var(--font-ui); color: var(--brand); text-shadow: 0 0 10px var(--brand-glow);">---</div>
+                    <div class="bal-value" id="global-height" style="font-size: 28px; font-weight: 800; font-family: var(--font-ui); color: var(--brand); margin-bottom: 0; text-shadow: 0 0 10px var(--brand-glow);">---</div>
                 </div>
-                <div class="card balance-box" style="margin-bottom: 0; padding: 20px;">
+                <div class="card balance-box" style="margin-bottom: 0; padding: 18px 20px;">
                     <div class="bal-label">Global Hashrate</div>
-                    <div class="bal-value" id="global-hashrate" style="font-size: 28px; font-weight: 800; font-family: var(--font-ui); color: #38bdf8; text-shadow: 0 0 15px rgba(56,189,248,0.8);">Estimating...</div>
-                </div>
-                <div class="card balance-box" style="margin-bottom: 0; padding: 20px;">
-                    <div class="bal-label">Local Hashrate</div>
-                    <div class="bal-value" id="ui-hashrate">0.00<span> MH/s</span></div>
-                </div>
-                <div class="card balance-box" style="margin-bottom: 0; padding: 20px;">
-                    <div class="bal-label">Submitted Shares</div>
-                    <div class="bal-value" id="ui-shares">0<span style="color:var(--success)"> Valid</span></div>
+                    <div class="bal-value" id="global-hashrate" style="font-size: 28px; font-weight: 800; font-family: var(--font-ui); color: #38bdf8; margin-bottom: 0; text-shadow: 0 0 15px rgba(56,189,248,0.8);">Estimating...</div>
                 </div>
             </div>
 
-            <div class="card">
-                <div class="input-group" style="margin-bottom: 25px;">
-                    <label>Q-BTC Wallet Address</label>
-                    <input type="text" id="mine-alias" placeholder="Enter receiving address..." value="" autocapitalize="off" autocomplete="off" spellcheck="false">
-                </div>
-                <div class="grid-2">
-                    <button id="btn-mine" onclick="toggleMining(true)">Start Mining</button>
-                    <button id="btn-stop-mine" onclick="toggleMining(false)" class="danger" style="display: none;">Stop Mining</button>
-                </div>
-            </div>
-            <div class="console" id="mine-console">
-                <div style="color:var(--text-muted); font-weight:800; text-transform:uppercase; margin-bottom:5px;">Engine Status</div>
-                <span style="font-size: 16px; color: var(--text-main);">STANDBY</span>
+            <div class="card" style="margin-bottom: 0; padding: 20px 24px;">
+                <div class="guide-title">Self-Custody Key Isolation</div>
+                <p class="guide-text">
+                    <span class="nowrap">Q-BTC Desktop</span> runs a local full-node verifier and <b>ML-DSA-65</b> encrypted keystore. Built-in pool mining has been removed to keep private keys isolated from external mining environments. Generate your <span class="code-pill">qbtc1...</span> address in <b>Wallet Overview</b> and mine directly to your own receiving address.
+                </p>
+
+                <div class="guide-title">1. Community Pool Mining (CPU / GPU)</div>
+                <p class="guide-text">
+                    Connect to any independent community-operated Stratum pool using open-source CPU, CUDA, or OpenCL miners shared in the <b>QBTC Genesis Members</b> community. Never use a pool as long-term storage.
+                </p>
+
+                <div class="guide-title">2. Local Solo Mining (Core CLI)</div>
+                <p class="guide-text" style="margin-bottom: 0;">
+                    To solo mine directly against a local full node without a pool, run <b class="nowrap">Q-BTC Core CLI</b> and execute: <span class="code-pill" style="margin-top: 4px;">auto_mine start &lt;wallet_alias_or_address&gt;</span>
+                </p>
             </div>
         </div>
     </div>
@@ -191,9 +183,7 @@
     <script>
         const API = 'http://127.0.0.1:12001/api';
         const { invoke } = window.__TAURI__.core;
-        const { listen } = window.__TAURI__.event;
         
-        let validShares = 0;
         let rpcToken = "";
 
         async function secureFetch(path, options = {}) {
@@ -351,45 +341,6 @@
                     cons.innerHTML = `<span style='color:var(--danger)'>Transfer Failed: ${data.message || data.error || 'Unknown error'}</span>`;
                 }
             } catch(e) { cons.innerHTML = `<span style='color:var(--danger)'>Execution Error:</span> ${e.message}`; }
-        }
-
-        listen('miner-log', (event) => {
-            const cons = document.getElementById('mine-console');
-            const msg = event.payload.message;
-            cons.innerHTML += `<div class="log-entry">${msg}</div>`;
-            cons.scrollTop = cons.scrollHeight;
-            if(msg.includes('✅ Share Accepted')) {
-                validShares++;
-                document.getElementById('ui-shares').innerHTML = `${validShares}<span style="color:var(--success)"> Valid</span>`;
-            }
-        });
-
-        listen('hash-rate', (event) => {
-            const mhs = event.payload.mhs;
-            document.getElementById('ui-hashrate').innerHTML = `${mhs.toFixed(2)}<span> MH/s</span>`;
-        });
-
-        async function toggleMining(start) {
-            const alias = document.getElementById('mine-alias').value.trim();
-            const cons = document.getElementById('mine-console');
-            const btnStart = document.getElementById('btn-mine');
-            const btnStop = document.getElementById('btn-stop-mine');
-            if(start) {
-                if(!alias) return cons.innerHTML = "<span style='color:var(--danger)'>Error: Target alias required.</span>";
-                btnStart.style.display = 'none'; 
-                btnStop.style.display = 'block';
-                cons.innerHTML = `<div style="color:var(--brand); font-weight:800; text-transform:uppercase; margin-bottom:5px;">Engine Active</div>`;
-                validShares = 0;
-                document.getElementById('ui-shares').innerHTML = `0<span style="color:var(--success)"> Valid</span>`;
-                try {
-                    await invoke('start_mining', { walletName: alias });
-                } catch(e) { cons.innerHTML += `<div class="log-entry" style="color:var(--danger)">IPC Error: ${e}</div>`; }
-            } else {
-                btnStart.style.display = 'block'; 
-                btnStop.style.display = 'none';
-                document.getElementById('ui-hashrate').innerHTML = `0.00<span> MH/s</span>`;
-                try { await invoke('stop_mining'); } catch(e) {}
-            }
         }
     </script>
 </body>
