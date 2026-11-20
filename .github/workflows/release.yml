@@ -55,6 +55,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tagName: ${{ github.ref_name }}
-          releaseName: 'Q-BTC Desktop Miner ${{ github.ref_name }}'
-          releaseBody: 'Official Q-BTC GUI Miner for Mac & Windows. Download the .dmg or .exe below to start mining.'
+          releaseName: 'Q-BTC Desktop ${{ github.ref_name }}'
+          releaseBody: 'Self-custody ML-DSA-65 post-quantum vault and full-node verifier for macOS & Windows. Download the .dmg or .exe installer below.'
           args: ${{ matrix.platform == 'macos-latest' && '--target universal-apple-darwin' || '' }}
